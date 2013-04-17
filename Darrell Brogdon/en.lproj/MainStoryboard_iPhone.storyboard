@@ -102,84 +102,28 @@
                                     <fragment>
                                         <string key="content">Would you like to get an idea of how I build apps? 
 
-Enter your email address and tap the button below and I'll email the source directly to you.</string>
+Visit Github for the source:  </string>
                                         <attributes>
                                             <font key="NSFont" size="14" name="Helvetica-Light"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cgo
-</string>
+                                    <fragment content="https://github.com/DarrellBrogdon/Darrells-iOS-App">
                                         <attributes>
-                                            <font key="NSFont" size="14" name="Helvetica"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="Note:">
-                                        <attributes>
-                                            <font key="NSFont" size="14" name="Helvetica-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" ">
-                                        <attributes>
-                                            <font key="NSFont" size="14" name="Helvetica"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="I won't sell or give away your email address to anyone.">
-                                        <attributes>
-                                            <font key="NSFont" size="14" name="Helvetica-Oblique"/>
+                                            <font key="NSFont" size="14" name="Helvetica-Light"/>
+                                            <string key="NSLink">https://github.com/DarrellBrogdon/Darrells-iOS-App</string>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="ssv-rb-L87">
-                                <rect key="frame" x="143" y="236" width="157" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <action selector="textFieldReturn:" destination="tpu-6K-tJX" eventType="editingDidEndOnExit" id="2wT-ws-NLO"/>
-                                </connections>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Email Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="laa-dc-uYj">
-                                <rect key="frame" x="20" y="240" width="115" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V9i-Np-mGc">
-                                <rect key="frame" x="143" y="274" width="80" height="31"/>
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="18"/>
-                                <state key="normal" title="Send">
-                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="submitDownloadSourceRequest:" destination="tpu-6K-tJX" eventType="touchUpInside" id="dRq-4n-pCO"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="creative_commons_88x31.png" id="Qzi-lN-LYU">
-                                <rect key="frame" x="116" y="384" width="88" height="31"/>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Business Card App by Darrell Brogdon is licensed under a Creative Commons Attribution-NonCommercial 3.0 Unported License." textAlignment="center" id="sfe-K1-5D4">
-                                <rect key="frame" x="20" y="423" width="280" height="56"/>
-                                <color key="backgroundColor" red="0.99444444444444446" green="0.98888888888888893" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Source" image="gear-2.png" id="vr7-Zu-xpe"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="emailAddress" destination="ssv-rb-L87" id="whN-WS-SEW"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nom-VH-dxA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -351,7 +295,6 @@ Cgo
         <image name="1.jpg" width="320" height="450"/>
         <image name="DarrellBrogdon.jpg" width="1080" height="720"/>
         <image name="controller.png" width="30" height="20"/>
-        <image name="creative_commons_88x31.png" width="88" height="31"/>
         <image name="face.png" width="820" height="1099"/>
         <image name="face_bw.png" width="820" height="1099"/>
         <image name="gear-2.png" width="26" height="28"/>

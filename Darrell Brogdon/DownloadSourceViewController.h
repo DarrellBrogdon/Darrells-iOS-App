@@ -11,11 +11,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DownloadSourceViewController : UIViewController <UIActionSheetDelegate>
-
-@property (strong, nonatomic) IBOutlet UITextField *emailAddress;
-
-- (IBAction)textFieldReturn:(id)sender;
-- (IBAction)submitDownloadSourceRequest:(id)sender;
+@interface DownloadSourceViewController : UIViewController
 
 @end
