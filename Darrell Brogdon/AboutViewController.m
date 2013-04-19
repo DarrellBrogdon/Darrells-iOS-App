@@ -11,16 +11,6 @@
 
 #import "AboutViewController.h"
 
-enum TableRowSelected
-{
-    kUIDisplayPickerRow = 0,
-    kUICreateNewContactRow,
-    kUIDisplayContactRow,
-    kUIEditUnkownContactRow
-};
-
-#define kUIEditUnknownContactRowHeight 81.0;
-
 @interface AboutViewController ()
 
 @end
@@ -31,8 +21,70 @@ enum TableRowSelected
 
 #pragma mark - User interaction
 
+-(BOOL)addressBookContactAlreadyExists
+{
+    BOOL return_value = NO;
+    
+    NSUInteger i;
+    NSUInteger k;
+    
+    CFStringRef search_first_name = CFSTR("Darrell");
+    CFStringRef search_last_name = CFSTR("Brogdon");
+    CFStringRef search_email_address = CFSTR("darrell@brogdon.net");
+    
+    CFErrorRef error = NULL;
+    
+    ABAddressBookRef address_book = ABAddressBookCreateWithOptions(NULL, &error);
+    NSArray *people = (NSArray *) CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(address_book));
+    
+    if (people == nil) {
+        NSLog(@"No Address Book entries to scan");
+        CFRelease(address_book);
+        return NO;
+    }
+    
+    for (i = 0; i < [people count]; i++) {
+        ABRecordRef person = (ABRecordRef) CFBridgingRetain([people objectAtIndex:i]);
+                
+        CFStringRef first_name = ABRecordCopyValue(person, kABPersonFirstNameProperty);
+        CFStringRef last_name = ABRecordCopyValue(person, kABPersonLastNameProperty);
+        
+        ABMutableMultiValueRef email_addresses = ABRecordCopyValue(person, kABPersonEmailProperty);
+        CFIndex email_count = ABMultiValueGetCount(email_addresses);
+        
+        for (k=0; k<email_count; k++) {
+            CFStringRef email_value = ABMultiValueCopyValueAtIndex(email_addresses, k);
+
+            if (first_name != nil && last_name != nil && email_value != nil &&
+                CFStringCompare(search_first_name, first_name, kCFCompareCaseInsensitive) == kCFCompareEqualTo &&
+                CFStringCompare(search_last_name, last_name, kCFCompareCaseInsensitive) == kCFCompareEqualTo &&
+                CFStringCompare(search_email_address, email_value, kCFCompareCaseInsensitive) == kCFCompareEqualTo) {
+                return_value = YES;
+            }
+        
+            CFRelease(email_value);
+        }
+    }
+    
+    CFRelease(address_book);
+        
+    return return_value;
+}
+
 -(IBAction)userDidClickAddContactButton:(id)sender
 {
+    if ([self addressBookContactAlreadyExists]) {
+        [infoButton setEnabled:NO];
+
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Contact Exists"
+                                                        message:@"Looks like you already have my contact info in your Address Book."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     ABRecordRef record = ABPersonCreate();
     CFErrorRef an_error = NULL;
     
@@ -54,50 +106,60 @@ enum TableRowSelected
     ABMutableMultiValueRef multi_skype = ABMultiValueCreateMutable(kABMultiStringPropertyType);
     ABMultiValueAddValueAndLabel(multi_skype, @"darrell.brogdon", kABPersonInstantMessageServiceSkype, NULL);
     ABRecordSetValue(record, kABPersonInstantMessageProperty, multi_skype, &an_error);
-    
-    if (an_error != NULL) {
-        NSLog(@"Error while creating contact");
-    }
-    
+        
     CFErrorRef error = NULL;
     ABAddressBookRef address_book = ABAddressBookCreateWithOptions(NULL, &error);
     ABAddressBookRequestAccessWithCompletion(address_book, ^(bool granted, CFErrorRef error) {
-        if (!granted) {
-            UIAlertView *fail_alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                            message:@"Unable to access address book"
-                                                           delegate:self
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:nil];
-            [fail_alert show];
-        } else {
-            BOOL is_added = ABAddressBookAddRecord(address_book, record, &error);
-            
-            if (is_added) {
-                NSLog(@"Address book entry added");
-                
+        if (granted) {            
+            if (ABAddressBookAddRecord(address_book, record, &error)) {                
                 error = NULL;
                 
-                BOOL is_saved = ABAddressBookSave(address_book, &error);
-                
-                if (is_saved) {
-                    NSLog(@"Saved address book");
-                    
-                    [infoButton setEnabled:NO];
+                if (ABAddressBookSave(address_book, &error)) {                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [infoButton setEnabled:NO];
+                        
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Contact Added"
+                                                                        message:@"You have my contact info in your Address Book now."
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                    });
                 } else {
-                    NSLog(@"ERROR saving address book: %@", error);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [infoButton setEnabled:NO];
+                        
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                        message:@"Unable to save changes to the Address Book."
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                    });
                 }
             } else {
-                NSLog(@"ERROR adding address book entry: %@", error);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [infoButton setEnabled:NO];
+                    
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                    message:@"Unable to add a contact to the Address Book."
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                });
             }
-            
-//            if (error == NULL) {
-//                UIAlertView *success_alert = [[UIAlertView alloc] initWithTitle:@"Contact Saved!"
-//                                                                        message:@"You now have my contact info in your Address Book"
-//                                                                       delegate:self
-//                                                              cancelButtonTitle:nil
-//                                                              otherButtonTitles:nil];
-//                [success_alert show];
-//            }
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [infoButton setEnabled:NO];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:@"Unable to access the Address Book."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            });
         }
         
         CFRelease(record);
@@ -152,6 +214,10 @@ enum TableRowSelected
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if ([self addressBookContactAlreadyExists]) {
+        [infoButton setEnabled:NO];
+    }
     
 }
 

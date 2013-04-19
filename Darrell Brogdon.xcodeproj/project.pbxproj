@@ -75,6 +75,7 @@
 		ED94E48D17205FDE0028B4BC /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		ED94E48F1720C4750028B4BC /* id-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "id-card.png"; sourceTree = "<group>"; };
 		ED94E4901720C4750028B4BC /* id-card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "id-card@2x.png"; sourceTree = "<group>"; };
+		ED94E4931721AB6F0028B4BC /* Darrell Brogdon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Darrell Brogdon.entitlements"; sourceTree = "<group>"; };
 		EDDC4B79171B611A0026C6D8 /* Darrell Brogdon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Darrell Brogdon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDC4B7C171B611A0026C6D8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EDDC4B7E171B611A0026C6D8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -175,6 +176,7 @@
 		EDDC4B82171B611A0026C6D8 /* Darrell Brogdon */ = {
 			isa = PBXGroup;
 			children = (
+				ED94E4931721AB6F0028B4BC /* Darrell Brogdon.entitlements */,
 				EDDC4BBF171B67A20026C6D8 /* Images */,
 				EDDC4B9A171B611A0026C6D8 /* AboutViewController.h */,
 				EDDC4B9B171B611A0026C6D8 /* AboutViewController.m */,

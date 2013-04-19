@@ -13,7 +13,7 @@
 #import <MessageUI/MessageUI.h>
 #import <AddressBook/AddressBook.h>
 
-@interface AboutViewController : UIViewController <MFMailComposeViewControllerDelegate>
+@interface AboutViewController : UIViewController <MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UIButton *infoButton;
 
