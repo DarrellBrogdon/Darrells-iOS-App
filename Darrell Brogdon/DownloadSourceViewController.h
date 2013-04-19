@@ -13,4 +13,8 @@
 
 @interface DownloadSourceViewController : UIViewController
 
+@property (nonatomic, retain) IBOutlet UIButton *infoButton;
+
+- (IBAction)infoButtonWasClicked:(id)sender;
+
 @end

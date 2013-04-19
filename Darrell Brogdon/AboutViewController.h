@@ -11,11 +11,14 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import <AddressBook/AddressBook.h>
 
 @interface AboutViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
-- (IBAction)userDidClickPhoneNumber:(id)sender;
-- (IBAction)userDidClickEmailAddress:(id)sender;
-- (IBAction)userDidClickLinkedInLink:(id)sender;
+@property (nonatomic, retain) IBOutlet UIButton *infoButton;
+
+-(IBAction)userDidClickPhoneNumber:(id)sender;
+-(IBAction)userDidClickEmailAddress:(id)sender;
+-(IBAction)userDidClickAddContactButton:(id)sender;
 
 @end

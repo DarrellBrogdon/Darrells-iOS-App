@@ -11,12 +11,24 @@
 
 #import "AppDelegate.h"
 #import "DownloadSourceViewController.h"
+#import "InfoViewController.h"
 
 @interface DownloadSourceViewController ()
 
 @end
 
 @implementation DownloadSourceViewController
+
+@synthesize infoButton;
+
+- (IBAction)infoButtonWasClicked:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        InfoViewController *infoViewController = [[InfoViewController alloc] init];
+        
+        [self presentViewController:infoViewController animated:YES completion:nil];
+    }];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
