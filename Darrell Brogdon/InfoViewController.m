@@ -16,6 +16,9 @@
 
 @synthesize okButton;
 
+//
+// Dismiss this view and return back to the "Download Source" view.
+//
 - (IBAction)okButtonWasClicked:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];

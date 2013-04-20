@@ -5,6 +5,9 @@
 //  Created by Darrell Brogdon on 4/15/13.
 //  Copyright (c) 2013 Darrell Brogdon. All rights reserved.
 //
+//  This work is licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License.
+//  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/.
+//
 
 #import <Foundation/Foundation.h>
 
@@ -19,7 +22,5 @@
 - (void) stopTimer;
 - (double) currentTimeInSeconds;
 - (double) timeElapsedInSeconds;
-- (double) timeElapsedInMilliseconds;
-- (double) timeElapsedInMinutes;
 
 @end

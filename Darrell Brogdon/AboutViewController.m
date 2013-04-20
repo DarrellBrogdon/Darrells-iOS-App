@@ -21,6 +21,9 @@
 
 #pragma mark - User interaction
 
+//
+// Check to see if my contact is already in their Address Book
+//
 -(BOOL)addressBookContactAlreadyExists
 {
     BOOL return_value = NO;
@@ -43,6 +46,7 @@
         return NO;
     }
     
+    // Loop through all the contacts looking for one that matches my first and last name as well as my email address.
     for (i = 0; i < [people count]; i++) {
         ABRecordRef person = (ABRecordRef) CFBridgingRetain([people objectAtIndex:i]);
                 
@@ -71,8 +75,14 @@
     return return_value;
 }
 
+
+//
+// Add my contact information to the Address Book
+//
 -(IBAction)userDidClickAddContactButton:(id)sender
 {
+    // We shouldn't ever hit this check since addressBookContactAlreadyExists gets called from viewDidLoad but
+    // lets avoid adding any possible duplicates just in case.
     if ([self addressBookContactAlreadyExists]) {
         [infoButton setEnabled:NO];
 
@@ -85,6 +95,7 @@
         return;
     }
     
+    // Create and populate the Address Book record
     ABRecordRef record = ABPersonCreate();
     CFErrorRef an_error = NULL;
     
@@ -106,7 +117,8 @@
     ABMutableMultiValueRef multi_skype = ABMultiValueCreateMutable(kABMultiStringPropertyType);
     ABMultiValueAddValueAndLabel(multi_skype, @"darrell.brogdon", kABPersonInstantMessageServiceSkype, NULL);
     ABRecordSetValue(record, kABPersonInstantMessageProperty, multi_skype, &an_error);
-        
+    
+    // Request access to the Address book.  If granted, add the record and save.
     CFErrorRef error = NULL;
     ABAddressBookRef address_book = ABAddressBookCreateWithOptions(NULL, &error);
     ABAddressBookRequestAccessWithCompletion(address_book, ^(bool granted, CFErrorRef error) {

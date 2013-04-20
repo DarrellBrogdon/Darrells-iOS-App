@@ -28,6 +28,9 @@
 		ED94E48E17205FDE0028B4BC /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED94E48D17205FDE0028B4BC /* AddressBookUI.framework */; };
 		ED94E4911720C4750028B4BC /* id-card.png in Resources */ = {isa = PBXBuildFile; fileRef = ED94E48F1720C4750028B4BC /* id-card.png */; };
 		ED94E4921720C4750028B4BC /* id-card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED94E4901720C4750028B4BC /* id-card@2x.png */; };
+		ED94E4951721C5B10028B4BC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED94E4941721C5B10028B4BC /* Default-568h@2x.png */; };
+		ED94E4971721C60D0028B4BC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED94E4961721C60D0028B4BC /* Default@2x.png */; };
+		ED94E4991721C6880028B4BC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = ED94E4981721C6880028B4BC /* Default.png */; };
 		EDDC4B7D171B611A0026C6D8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDC4B7C171B611A0026C6D8 /* UIKit.framework */; };
 		EDDC4B7F171B611A0026C6D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDC4B7E171B611A0026C6D8 /* Foundation.framework */; };
 		EDDC4B81171B611A0026C6D8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDC4B80171B611A0026C6D8 /* CoreGraphics.framework */; };
@@ -76,6 +79,9 @@
 		ED94E48F1720C4750028B4BC /* id-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "id-card.png"; sourceTree = "<group>"; };
 		ED94E4901720C4750028B4BC /* id-card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "id-card@2x.png"; sourceTree = "<group>"; };
 		ED94E4931721AB6F0028B4BC /* Darrell Brogdon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Darrell Brogdon.entitlements"; sourceTree = "<group>"; };
+		ED94E4941721C5B10028B4BC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		ED94E4961721C60D0028B4BC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		ED94E4981721C6880028B4BC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		EDDC4B79171B611A0026C6D8 /* Darrell Brogdon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Darrell Brogdon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDC4B7C171B611A0026C6D8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EDDC4B7E171B611A0026C6D8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -141,6 +147,9 @@
 		EDDC4B70171B611A0026C6D8 = {
 			isa = PBXGroup;
 			children = (
+				ED94E4981721C6880028B4BC /* Default.png */,
+				ED94E4961721C60D0028B4BC /* Default@2x.png */,
+				ED94E4941721C5B10028B4BC /* Default-568h@2x.png */,
 				ED94E48D17205FDE0028B4BC /* AddressBookUI.framework */,
 				ED94E48B17205F6F0028B4BC /* AddressBook.framework */,
 				ED94E47A171F5EDD0028B4BC /* me_114x114.png */,
@@ -308,6 +317,9 @@
 				ED94E48A172056270028B4BC /* cc_88x31.png in Resources */,
 				ED94E4911720C4750028B4BC /* id-card.png in Resources */,
 				ED94E4921720C4750028B4BC /* id-card@2x.png in Resources */,
+				ED94E4951721C5B10028B4BC /* Default-568h@2x.png in Resources */,
+				ED94E4971721C60D0028B4BC /* Default@2x.png in Resources */,
+				ED94E4991721C6880028B4BC /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,10 +444,14 @@
 		EDDC4BAC171B611A0026C6D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Darrell Brogdon/Darrell Brogdon-Prefix.pch";
 				INFOPLIST_FILE = "Darrell Brogdon/Darrell Brogdon-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

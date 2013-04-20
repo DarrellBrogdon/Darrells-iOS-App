@@ -33,11 +33,16 @@ int game_image = 1;
 Timer *timer;
 NSTimer *interval;
 
+//
+// The user found the face so replace the current image with the next in line.  Same for the face button.
+//
 - (IBAction)buttonWasClicked:(id)sender
-{    
+{
+    // Only do this if the timer is still running.
     if ([timer isRunning]) {
         [timer stopTimer];
         
+        // Update the score and current timer values
         NSNumberFormatter *number_formatter = [[NSNumberFormatter alloc] init];
         [number_formatter setPositiveFormat:@"###.#"];
         
@@ -46,6 +51,7 @@ NSTimer *interval;
         scoreLabel.text = [number_formatter stringFromNumber:current_score_as_number];
         timerLabel.text = @"0.0";
         
+        // Stop the timer for now until we can show the next image and face button (assuming we're not at the last one).
         [interval invalidate];
         
         game_image++;
@@ -88,11 +94,13 @@ NSTimer *interval;
             [gameImage setImage:new_image];
             [timer startTimer];
             
+            // Restart the timer now that the new image and face button are ready
             interval = [NSTimer scheduledTimerWithTimeInterval:1
                                                         target:self
                                                       selector:@selector(updateTime)
                                                       userInfo:nil
                                                        repeats:YES];
+        // We're at the last image so notify the user
         } else {
             faceButton5.hidden = YES;
             gameImage.alpha = 0.25;
@@ -110,6 +118,9 @@ NSTimer *interval;
     }
 }
 
+//
+// Update the "Time:" label. Gets called once a second.
+//
 - (void) updateTime
 {    
     NSNumber *current_time = [NSNumber numberWithDouble:[timer currentTimeInSeconds]];
@@ -124,6 +135,7 @@ NSTimer *interval;
 {
     [super viewDidLoad];
     
+    // Basic instructions on how to play.
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Where's Darrell?"
                                                     message:@"Find the picture of my face and tap it.  The faster you find it the better you are."
                                                    delegate:self
@@ -132,6 +144,9 @@ NSTimer *interval;
     [alert show];    
 }
 
+//
+// Handler for when the user clicks the "Let's Play!" button on the intro dialog.  This shows the first image and face button and starts the timer.
+//
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {

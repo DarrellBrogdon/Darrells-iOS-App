@@ -21,6 +21,9 @@
 
 @synthesize infoButton;
 
+//
+// Show the information View when the info button is clicked.
+//
 - (IBAction)infoButtonWasClicked:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:^{
