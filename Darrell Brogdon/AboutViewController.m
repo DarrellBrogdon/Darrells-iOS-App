@@ -114,12 +114,24 @@
     ABMultiValueAddValueAndLabel(multi_aim, @"Xelphyr", kABPersonInstantMessageServiceAIM, NULL);
     ABRecordSetValue(record, kABPersonInstantMessageProperty, multi_aim, &an_error);
     
-    ABMutableMultiValueRef multi_skype = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-    ABMultiValueAddValueAndLabel(multi_skype, @"darrell.brogdon", kABPersonInstantMessageServiceSkype, NULL);
-    ABRecordSetValue(record, kABPersonInstantMessageProperty, multi_skype, &an_error);
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                (NSString*)kABPersonInstantMessageServiceSkype,
+                                (NSString*)kABPersonInstantMessageServiceKey, @"darrell.brogdon",
+                                (NSString*)kABPersonInstantMessageUsernameKey,
+                                nil];
+    CFStringRef label = NULL;
+    CFErrorRef error = NULL;
+    ABMutableMultiValueRef values = ABMultiValueCreateMutable(kABMultiDictionaryPropertyType);
+    BOOL didAdd = ABMultiValueAddValueAndLabel(values, (__bridge CFTypeRef)(dictionary), label, NULL);
+    BOOL didSet = ABRecordSetValue(record, kABPersonInstantMessageProperty, values, &error);
+    if (!didAdd || !didSet) {
+        CFStringRef errorDescription = CFErrorCopyDescription(error);
+        NSLog(@"%s error %@ while inserting multi dictionary property %@ into ABRecordRef", __FUNCTION__, dictionary, errorDescription);
+        CFRelease(errorDescription);
+    }
+    CFRelease(values);
     
     // Request access to the Address book.  If granted, add the record and save.
-    CFErrorRef error = NULL;
     ABAddressBookRef address_book = ABAddressBookCreateWithOptions(NULL, &error);
     ABAddressBookRequestAccessWithCompletion(address_book, ^(bool granted, CFErrorRef error) {
         if (granted) {            
@@ -178,7 +190,6 @@
         CFRelease(multi_phone);
         CFRelease(multi_email);
         CFRelease(multi_aim);
-        CFRelease(multi_skype);
         CFRelease(address_book);
     });
 }
